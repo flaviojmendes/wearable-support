@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
+var winston = require('winston')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -11,6 +12,10 @@ var weatherRouter = require('./routes/weather.controller');
 var appKeyRouter = require('./routes/appKey.controller');
 var mongoURL = "mongodb://localhost:27017/fsupport";
 var expressMongoDb = require('express-mongo-db');
+
+process.on('uncaughtException', function (err) {
+    console.log('Caught exception: ', err);
+});
 
 var app = express();
 
