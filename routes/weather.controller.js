@@ -6,13 +6,9 @@ router.get('/:lat/:lon', function(req, res, next) {
 
     if (req.params.lat && req.params.lon) {
         res.setHeader('Content-Type', 'application/json')
-
-        openWeatherService.retrieveWeather(req.params.lat, req.params.lon, function (err, body) {
-            if (err) {
-                console.log(err);
-            } else {
-                res.send(body);
-            }
+        openWeatherService.setDB(req.db)
+        openWeatherService.retrieveWeather(req.params.lat, req.params.lon).then(function (body) {
+            res.send(body);
         });
     }
 });
