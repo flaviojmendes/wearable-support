@@ -2,11 +2,21 @@ const express = require('express');
 const router = express.Router();
 const appKeyService = require('../app/services/appkey.service')
 
-router.get('/:appName/:key', function(req, res) {
+router.post('/:appName', function(req, res) {
 
-    if (req.params.appName && req.params.key) {
+    if (req.params.appName) {
         appKeyService.setDB(req.db);
-        appKeyService.save(req.params.key, req.params.appName).then(function (body) {
+        appKeyService.save(req.params.appName, req.body.keys).then(function (body) {
+            res.send(body);
+        });
+    }
+});
+
+router.delete('/:appName', function(req, res) {
+
+    if (req.params.appName) {
+        appKeyService.setDB(req.db);
+        appKeyService.remove(req.body.keys).then(function (body) {
             res.send(body);
         });
     }
