@@ -1,13 +1,13 @@
 const Q = require('q');
 const ObjectId = require('mongodb').ObjectId;
 var db = null;
-
+const COLLECTION = 'AppKey';
 
 function save(appName, keys) {
     var deferred = Q.defer();
 
     keys.forEach(function (key, index){
-        db.collection('AppKey').insertOne({
+        db.collection(COLLECTION).insertOne({
             key: key,
             appName: appName
         }).then(function (result) {
@@ -22,7 +22,7 @@ function save(appName, keys) {
 
 var findByAppName = function(appName) {
     var deferred = Q.defer();
-    var cursor = db.collection('AppKey').find({'appName': appName}, {})
+    var cursor = db.collection(COLLECTION).find({'appName': appName}, {})
         .toArray(function(err, results) {
             deferred.resolve(results);
         });
@@ -34,8 +34,8 @@ var remove = function(keys) {
     var deferred = Q.defer();
 
     keys.forEach(function (key, index){
-        db.collection('AppKey', function(err, collection) {
-            db.collection('AppKey').deleteOne({_id: ObjectId(key)}).then(function () {
+        db.collection(COLLECTION, function(err, collection) {
+            db.collection(COLLECTION).deleteOne({_id: ObjectId(key)}).then(function () {
                 if(index == keys.length-1) {
                     deferred.resolve();
                 }
@@ -44,7 +44,7 @@ var remove = function(keys) {
     });
 
     return deferred.promise;
-}
+};
 
 module.exports = {
     save: save,

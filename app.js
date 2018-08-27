@@ -7,7 +7,7 @@ var sassMiddleware = require('node-sass-middleware');
 var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var userDetailsRouter = require('./routes/userDetails.controller');
 var weatherRouter = require('./routes/weather.controller');
 var appKeyRouter = require('./routes/appKey.controller');
 var mongoURL = "mongodb://localhost:27017/fsupport";
@@ -41,7 +41,7 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/userDetails', userDetailsRouter);
 app.use('/weather', weatherRouter);
 app.use('/appKey', appKeyRouter);
 
