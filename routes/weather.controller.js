@@ -21,7 +21,7 @@ router.get('/:lat/:lon/:appId/:userId/', function(req, res, next) {
                     userDetails.appId = req.params.appId;
                     userDetails.date = new Date();
                     userDetailsService.save(userDetails).then(
-                        function(body) {
+                        function() {
                             res.send(body);
                         }
                     );

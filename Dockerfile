@@ -1,6 +1,9 @@
 FROM node:7.7.2-alpine
 
-WORKDIR /usr/app
-COPY package.json .
-RUN npm install --quiet
-COPY . .
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app/
+RUN npm install
+COPY . /usr/src/app
+EXPOSE 3000
+CMD ["npm", "start"]

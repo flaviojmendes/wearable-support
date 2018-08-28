@@ -10,7 +10,7 @@ var indexRouter = require('./routes/index');
 var userDetailsRouter = require('./routes/userDetails.controller');
 var weatherRouter = require('./routes/weather.controller');
 var appKeyRouter = require('./routes/appKey.controller');
-var mongoURL = "mongodb://localhost:27017/fsupport";
+var mongoURL = process.env.NODE_ENV == 'production' ? "mongodb://mongo-app:27017/fsupport" : "mongodb://localhost:27017/fsupport";
 var expressMongoDb = require('express-mongo-db');
 
 process.on('uncaughtException', function (err) {
