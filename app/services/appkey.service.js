@@ -15,7 +15,7 @@ function save(appName, keys) {
                 deferred.resolve(result);
             }
         })
-    })
+    });
 
     return deferred.promise;
 }
@@ -28,7 +28,7 @@ var findByAppName = function(appName) {
         });
 
     return deferred.promise;
-}
+};
 
 var remove = function(keys) {
     var deferred = Q.defer();
@@ -53,4 +53,4 @@ module.exports = {
     setDB: function(reqDB){
         db = reqDB
     }
-}
+};

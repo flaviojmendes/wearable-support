@@ -15,12 +15,12 @@ function save(userDetails) {
         date: userDetails.date
     }).then(function (result) {
         deferred.resolve(result);
-    })
+    });
 
     return deferred.promise;
 }
 
-function list(userDetails) {
+function list() {
     var deferred = Q.defer();
 
     var cursor = db.collection(COLLECTION).find({
